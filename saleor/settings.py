@@ -1,5 +1,5 @@
 import ast
-import os.path
+import os
 import warnings
 from datetime import timedelta
 
@@ -571,13 +571,13 @@ CACHES = {"default": django_cache_url.config()}
 
 # Default False because storefront and dashboard don't support expiration of token
 JWT_EXPIRE = get_bool_from_env("JWT_EXPIRE", False)
-JWT_TTL_ACCESS = timedelta(seconds=parse(os.environ.get("JWT_TTL_ACCESS", "5 minutes")))
+JWT_TTL_ACCESS = timedelta(seconds=parse(os.environ.get("JWT_TTL_ACCESS", "5 minutes")) or 600)
 JWT_TTL_APP_ACCESS = timedelta(
-    seconds=parse(os.environ.get("JWT_TTL_APP_ACCESS", "5 minutes"))
+    seconds=parse(os.environ.get("JWT_TTL_APP_ACCESS", "5 minutes")) or 600
 )
-JWT_TTL_REFRESH = timedelta(seconds=parse(os.environ.get("JWT_TTL_REFRESH", "30 days")))
+JWT_TTL_REFRESH = timedelta(seconds=parse(os.environ.get("JWT_TTL_REFRESH", "30 days")) or 2592000)
 
 
 JWT_TTL_REQUEST_EMAIL_CHANGE = timedelta(
-    seconds=parse(os.environ.get("JWT_TTL_REQUEST_EMAIL_CHANGE", "1 hour")),
+    seconds=parse(os.environ.get("JWT_TTL_REQUEST_EMAIL_CHANGE", "1 hour")) or 3600,
 )
